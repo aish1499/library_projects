@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'listings'%}"method="GET"
+class="text-center mx-4 my-5" id="filter">
+<input type="text"name="q"id="" class="form-control mx-5 p-4 "/>
+<button type="submit" form="filter" class="btn btn-dark px-3" ><i class="fa fa-search" aria-hidden="true"></i></button>
+
+{% for book in all_books %}
+    <div class="row container">
+      <div class="col-sm-3 col-lg-3">
+        <div class="card">
+          <div class="card-body">
+          {% if book.photo %}
+          <img src="{{book.photo.url}} " />
+            {% else %}
+            <img class="img" width="200" height="320" src="https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjr2ffu1_XlAhXgyzgGHfmiAPwQjRx6BAgBEAQ&url=http%3A%2F%2Fwww.prometheusbooks.com%2F&psig=AOvVaw0aaghVhKOAbQbY_r_NXPTe&ust=1574231827295225" alt="">
+            {% endif %}
+          </div>
+          <div class="card-footer">
+            <h3>{{book.name}}</h3><a href="" class="btn btn-dark">{{book.renter.}} </a>
+            <h4 align="right">~{{book.author}}</h4>
+            <a href="{% url 'listing' book.id %}" class="btn btn-primary">More info</a>
+            <a href="{% url 'admin:books_book_change' book.id%}" class= "btn btn-warning">Modify</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col-sm-3">
+    <div class="card">
+    <div class="card-footer text-muted">
+    <a href="{% url 'admin:books_book_add' %}">Add new Book</a>
+    </div>
+    </div>
+    </div>
+
+
+
+{% endblock content %}

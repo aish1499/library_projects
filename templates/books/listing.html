@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+<div class="col-md-8">
+    <div class="container-fluid px-auto">
+        <div class="alert alert-success">
+            <h1>This is Summary</h1>
+            {{book.summary}}
+        </div>
+    </div>
+
+</div>
+
+<div class="col-md-4 float-right text-center">
+    
+        <div class="card-avatar">
+            <a href="#pablo">
+        {% if book.photo %}
+            <img class="img" src="{{book.photo.url}} " />
+        {% endif %}   
+            </a>
+        </div>
+        <div class="card-body">
+            <h6 class="card-category text-gray">{{book.genre}}</h6>
+            <h4 class="card-title">{{book.name}} </h4>
+            <p class="card-description">
+            {{book.author.name}}
+            </p>
+            <span class="#pablo" class="btn btn-primary btn-round">{{book.published_on|timesince }} </span>
+        </div>
+    
+</div>
+<div class="float-left">
+{% crispy form %}
+
+{% comment %} <form method="POST" class="form-group">
+{% csrf_token %}
+
+
+<div class="row">
+  <div class="col-sm-6 col-lg-6 col-form-label">{{form.stars.label_tag}}</div>
+  <div class="col-sm-6 col-lg-6 col-form-label">{{form.stars}}</div>
+  {% comment %} <div class="row"> {% endcomment %}
+  {% comment %} <div class="col-sm-6 col-lg-6 col-form-label">{{form.comment.label_tag}}</div>
+  <div class="col-sm-6 col-lg-6 col-form-label">{{form.comment}}</div>
+  </div>{% endcomment %} 
+   <div class="row"style="height:100px;"></div>
+   <div class="row mx-auto"></div>
+
+
+   {% comment %} {% endcomment %} 
+
+{% comment %} <table>
+<tbody>
+<tr>
+<td>{{form.stars.lable_tag}}</td>
+<td>{{form.stars}}</td>
+</tr>
+<tr>
+    <td>{{form.username.verbose_name}}</td>
+    <td>{{form.username}}</td>
+</tr>
+</tbody>
+</table> {% endcomment %}
+
+
+{% comment %} <button type="submit" class="btn btn-dark">Submit</button>
+</form>
+</div> {% endcomment %}
+
+</div>
+{% endblock content %}
+
+ 
